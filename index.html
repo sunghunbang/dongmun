@@ -106,7 +106,7 @@
   }
   .meta-line b { color: #f3dba0; }
 
-  section { padding: 26px 36px 6px; }
+  section { padding: 26px 36px 6px; position: relative; z-index: 1; }
   section h2 {
     font-size: 17px;
     color: var(--maroon);
@@ -134,13 +134,6 @@
     margin-bottom: 18px;
     font-size: 13.5px;
     background: #fffdf8;
-  }
-  table caption {
-    text-align: left;
-    font-size: 13px;
-    color: var(--maroon);
-    font-weight: 700;
-    margin-bottom: 6px;
   }
   thead th {
     background: var(--maroon);
@@ -220,6 +213,8 @@
   }
 
   footer {
+    position: relative;
+    z-index: 1;
     background: var(--maroon-dark);
     color: #e9ddc9;
     text-align: center;
@@ -230,7 +225,8 @@
 
   @media print {
     body { background: #fff; }
-    .wrap { box-shadow: none; }
+    .wrap { box-shadow: none; background: var(--ivory); }
+    .bg-motif { display: none; }
   }
 </style>
 </head>
@@ -362,6 +358,7 @@
             <span class="badge g3">3학년</span> 전체)
           </td>
           <td>
+            강사 PPT 자료 수합 및 노트북 바탕화면 설치: <span class="role">미술교육부장 방성훈</span><br>
             사회: <span class="role">미술교육부장 방성훈</span><br>
             촬영: <span class="staff s3">교사 김도이</span>
           </td>
