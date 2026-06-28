@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>「만개 - 피어나다」 당일 업무분장표</title>
+<style>
+  :root {
+    --maroon: #7c2230;
+    --maroon-dark: #5a1620;
+    --ink: #33403f;
+    --ivory: #f7f2e7;
+    --ivory-soft: #efe6d2;
+    --line: #ddccab;
+    --g1-bg: #dde8ef; --g1-fg: #2a5d7a;   /* 1학년 파스텔 블루 */
+    --g2-bg: #f3dde1; --g2-fg: #8b2332;   /* 2학년 파스텔 핑크(버건디 계열, 강조) */
+    --g3-bg: #e6ead9; --g3-fg: #4f6b3a;   /* 3학년 파스텔 그린 */
+    --role-bg: #f3e4b8; --role-fg: #7a5710;
+    --duty-bg: #dbe6e4; --duty-fg: #1f4a45;
+    --s1-bg: #d8ece8; --s1-fg: #1f6e5c;
+    --s2-bg: #ece0ec; --s2-fg: #6a3a78;
+    --s3-bg: #f6e2cf; --s3-fg: #a05a16;
+    --s4-bg: #f4ecc8; --s4-fg: #8a6c0c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+    background: var(--ivory);
+    color: var(--ink);
+    line-height: 1.55;
+    position: relative;
+  }
+  .bg-motif {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 720px;
+    max-width: 90vw;
+    opacity: 0.05;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    background: rgba(247,242,231,0.86);
+    box-shadow: 0 0 24px rgba(90,22,32,0.08);
+  }
+  .page-head {
+    position: relative;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    color: var(--ivory);
+    padding: 30px 36px 26px;
+    overflow: hidden;
+  }
+  .page-head::before {
+    content: "";
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(247,242,231,0.16) 0%, rgba(247,242,231,0) 70%);
+  }
+  .page-head::after {
+    content: "";
+    position: absolute;
+    left: -40px; bottom: -80px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(247,242,231,0.10) 0%, rgba(247,242,231,0) 70%);
+  }
+  .band {
+    position: relative;
+    z-index: 1;
+  }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #e8c98f;
+    margin: 0 0 6px;
+  }
+  .page-head h1 {
+    margin: 0 0 4px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+  }
+  .page-head .subtitle {
+    margin: 0 0 16px;
+    font-size: 14px;
+    color: #e9ddc9;
+  }
+  .meta-line {
+    position: relative;
+    z-index: 1;
+    font-size: 13.5px;
+    color: var(--ivory);
+    background: rgba(247,242,231,0.12);
+    border: 1px solid rgba(247,242,231,0.35);
+    border-radius: 8px;
+    padding: 8px 14px;
+    display: inline-block;
+  }
+  .meta-line b { color: #f3dba0; }
+
+  section { padding: 26px 36px 6px; }
+  section h2 {
+    font-size: 17px;
+    color: var(--maroon);
+    border-bottom: 2px solid var(--maroon);
+    padding-bottom: 8px;
+    margin: 0 0 14px;
+    font-weight: 800;
+  }
+
+  ol.agenda {
+    margin: 0 0 18px;
+    padding: 14px 18px 14px 34px;
+    background: var(--ivory-soft);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--maroon);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  ol.agenda li { margin-bottom: 4px; }
+  ol.agenda li:last-child { margin-bottom: 0; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+    font-size: 13.5px;
+    background: #fffdf8;
+  }
+  table caption {
+    text-align: left;
+    font-size: 13px;
+    color: var(--maroon);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  thead th {
+    background: var(--maroon);
+    color: var(--ivory);
+    font-weight: 700;
+    padding: 9px 10px;
+    text-align: left;
+    border: 1px solid var(--maroon-dark);
+  }
+  tbody td {
+    padding: 10px 10px;
+    border: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) td { background: #fbf6ea; }
+  td.time {
+    white-space: nowrap;
+    font-weight: 700;
+    color: var(--maroon);
+    width: 92px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 2px;
+  }
+  .g1 { background: var(--g1-bg); color: var(--g1-fg); }
+  .g2 { background: var(--g2-bg); color: var(--g2-fg); }
+  .g3 { background: var(--g3-bg); color: var(--g3-fg); }
+
+  .role {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 6px;
+    background: var(--role-bg);
+    color: var(--role-fg);
+    font-weight: 800;
+  }
+  .duty {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 6px;
+    background: var(--duty-bg);
+    color: var(--duty-fg);
+    font-weight: 700;
+  }
+  .staff {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  .s1 { background: var(--s1-bg); color: var(--s1-fg); }
+  .s2 { background: var(--s2-bg); color: var(--s2-fg); }
+  .s3 { background: var(--s3-bg); color: var(--s3-fg); }
+  .s4 { background: var(--s4-bg); color: var(--s4-fg); }
+
+  .note {
+    font-size: 12.8px;
+    color: #5a5045;
+    background: var(--ivory-soft);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 22px;
+  }
+  .note.warn {
+    background: #fbeee2;
+    border: 1px solid #e3b98a;
+    border-left: 5px solid var(--maroon);
+    color: #6a3a1a;
+    font-weight: 600;
+  }
+
+  footer {
+    background: var(--maroon-dark);
+    color: #e9ddc9;
+    text-align: center;
+    font-size: 12.5px;
+    padding: 14px;
+    letter-spacing: 0.4px;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .wrap { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg class="bg-motif" viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <filter id="inkblur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" />
+    </filter>
+  </defs>
+  <g fill="none" stroke="#33403f" stroke-width="1">
+    <line x1="200" y1="20" x2="200" y2="540" stroke-opacity="0.6"/>
+  </g>
+  <circle cx="200" cy="60" r="16" fill="#33403f"/>
+  <circle cx="200" cy="500" r="13" fill="#33403f"/>
+  <g filter="url(#inkblur)" fill="#33403f">
+    <ellipse cx="200" cy="300" rx="95" ry="80" opacity="0.85"/>
+    <ellipse cx="150" cy="250" rx="55" ry="40" opacity="0.6"/>
+    <ellipse cx="250" cy="250" rx="55" ry="40" opacity="0.6"/>
+    <ellipse cx="150" cy="350" rx="60" ry="45" opacity="0.65"/>
+    <ellipse cx="250" cy="350" rx="60" ry="45" opacity="0.65"/>
+    <ellipse cx="200" cy="230" rx="50" ry="60" opacity="0.5"/>
+    <ellipse cx="200" cy="390" rx="80" ry="40" opacity="0.55"/>
+  </g>
+  <g fill="none" stroke="#33403f" stroke-width="1.4" stroke-opacity="0.5">
+    <path d="M200,140 C150,120 110,90 80,70 C95,110 120,150 150,170" />
+    <path d="M200,140 C250,120 290,90 320,70 C305,110 280,150 250,170" />
+    <path d="M120,300 C70,280 40,260 20,250" />
+    <path d="M280,300 C330,280 360,260 380,250" />
+    <path d="M150,440 C110,460 70,480 50,500" />
+    <path d="M250,440 C290,460 330,480 350,500" />
+  </g>
+  <g fill="#33403f" opacity="0.5">
+    <circle cx="80" cy="70" r="3"/>
+    <circle cx="320" cy="70" r="3"/>
+    <circle cx="20" cy="250" r="2.5"/>
+    <circle cx="380" cy="250" r="2.5"/>
+    <circle cx="50" cy="500" r="3"/>
+    <circle cx="350" cy="500" r="3"/>
+  </g>
+</svg>
+
+<div class="wrap">
+
+  <header class="page-head">
+    <div class="band">
+      <p class="eyebrow">CHUNGNAM ARTS HIGH SCHOOL · 개교 30주년 기념</p>
+      <h1>미술과 동문전 「만개 - 피어나다」</h1>
+      <p class="subtitle">당일 업무분장표</p>
+      <div class="meta-line">
+        행사일: <b>2026. 7. 2.(목)</b> &nbsp;|&nbsp; 전시기간: <b>2026. 6. 29.(월) ~ 7. 10.(금)</b> &nbsp;|&nbsp;
+        총괄: <b>미술교육부장 방성훈</b>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <h2>오픈식 당일 일정 — 2026. 7. 2.(목) 09:50~10:10</h2>
+
+    <ol class="agenda">
+      <li>사회자 인사 및 오픈식 시작 안내</li>
+      <li>참여 인원 소개 (교장·교감·참여작가 7명)</li>
+      <li>교장선생님 축사</li>
+      <li>동문회장님 축사</li>
+      <li>오픈식 테이프 컷팅</li>
+      <li>동문작가&ndash;학생 단체 사진촬영</li>
+      <li>오픈식 마무리</li>
+    </ol>
+
+    <table>
+      <thead>
+        <tr>
+          <th>시간</th>
+          <th>장소</th>
+          <th>내용</th>
+          <th>담당</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">09:50&ndash;10:10</td>
+          <td>예혼갤러리<br>(오픈식)</td>
+          <td>
+            학교장·교감·참여작가(동문 7명)·미술전임교사 및 참관 희망교사,
+            미술과 <span class="badge g2">2학년</span> 학생 참석.<br>
+            테이프 컷팅 진행(흰장갑 전달 → 컷팅가위 전달 → 수거).<br>
+            동문작가-학생 단체 사진촬영.<br>
+            오픈식 마무리 후 미술과 <span class="badge g2">2학년</span> 강당 이동.
+          </td>
+          <td>
+            사회: <span class="role">미술교육부장 방성훈</span><br>
+            컷팅 진행: 학생회장 송인영, 부회장 김희연 (준비: <span class="staff s2">교사 임계은</span>)<br>
+            촬영: <span class="staff s3">교사 김도이</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="time">09:50&ndash;</td>
+          <td>강당</td>
+          <td>
+            미술과 <span class="badge g1">1학년</span> <span class="badge g3">3학년</span>
+            강당 이동, 노트북·강연자료·마이크 세팅
+          </td>
+          <td>
+            방송 세팅 협조: <span class="staff s1">교사 임준우</span><br>
+            최종 확인: <span class="role">미술교육부장 방성훈</span><br>
+            3학년 인솔: <span class="staff s4">교사 박영선</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="time">10:10&ndash;10:15</td>
+          <td>강당</td>
+          <td>
+            오픈식 종료 후 미술과 <span class="badge g2">2학년</span> 합류,
+            미술과 <span class="badge g1">1학년</span>
+            <span class="badge g2">2학년</span>
+            <span class="badge g3">3학년</span>
+            전체 강당 집결
+          </td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="time">10:15&ndash;10:40</td>
+          <td>강당</td>
+          <td>
+            인사 및 참여작가(동문 7명) 소개, &lsquo;선배와의 대화&rsquo; 강연 안내
+            (미술과 <span class="badge g1">1학년</span>
+            <span class="badge g2">2학년</span>
+            <span class="badge g3">3학년</span> 전체)
+          </td>
+          <td>
+            사회: <span class="role">미술교육부장 방성훈</span><br>
+            촬영: <span class="staff s3">교사 김도이</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="time">10:40&ndash;11:40</td>
+          <td>강당</td>
+          <td>
+            참여작가(동문) 7명 &lsquo;선배와의 대화&rsquo; 강연
+            (미술과 <span class="badge g1">1학년</span>
+            <span class="badge g2">2학년</span>
+            <span class="badge g3">3학년</span> 전체)
+          </td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="time">상시</td>
+          <td>예혼갤러리 입구</td>
+          <td>방명록 준비 및 비치 확인</td>
+          <td><span class="staff s2">교사 임계은</span></td>
+        </tr>
+        <tr>
+          <td class="time">기타</td>
+          <td>행정</td>
+          <td>강사등록부 및 방명록(강사비 행정처리)</td>
+          <td><span class="staff s2">교사 임계은</span></td>
+        </tr>
+        <tr>
+          <td class="time">기타</td>
+          <td>행정</td>
+          <td>가정통신문, 홍보자료 발송</td>
+          <td><span class="staff s2">교사 임계은</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      담당자 색상 — <span class="staff s1">교사 임준우</span> 방송 ·
+      <span class="staff s2">교사 임계은</span> 행정/준비 ·
+      <span class="staff s3">교사 김도이</span> 촬영 ·
+      <span class="staff s4">교사 박영선</span> 3학년 인솔
+    </div>
+  </section>
+
+  <section>
+    <h2>전시 운영 일정</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>기간 / 일시</th>
+          <th>운영시간</th>
+          <th>담당</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time">평일</td>
+          <td>2026. 6. 29.(월) ~ 7. 10.(금)</td>
+          <td>20:30까지 운영</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="time">토요일</td>
+          <td>전시기간 내 토요일</td>
+          <td>10:00 ~ 17:00</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="time">일요일</td>
+          <td>2026. 7. 5.(일) <i>*운영시간 필히 확인</i></td>
+          <td>13:00 ~ 17:00</td>
+          <td><span class="duty">학교지킴이</span></td>
+        </tr>
+        <tr>
+          <td class="time">작품수거</td>
+          <td>2026. 7. 11.(토)</td>
+          <td>09:00 ~ 15:00 (개별수거)</td>
+          <td><span class="staff s4">교사 류민희</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note warn">
+      7.5(일) 운영은 <span class="duty">학교지킴이</span> 담당이며, 관련 수당 행정실 품의는
+      <span class="role">미술교육부장 방성훈</span>이 처리합니다.<br>
+      ※ 품의 대상 일정 — 7.5(일) 13:00~17:00 전시장 운영 / 7.11(토) 09:00~15:00 작품 개별수거.
+    </div>
+  </section>
+
+  <footer>충남예술고등학교 미술교육부 · 개교 30주년 기념 미술과 동문전 「만개-피어나다」</footer>
+</div>
+</body>
+</html>
